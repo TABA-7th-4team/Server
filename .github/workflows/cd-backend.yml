@@ -18,10 +18,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: make application-dev.yml
+      - name: make application-main.yml
         run: |
           cd ./src/main/resources
-          touch ./application-dev.yml
+          touch ./application-main.yml
           echo "${{ secrets.MAIN_YML }}" >> ./application-main.yml
         shell: bash
 
@@ -38,7 +38,7 @@ jobs:
           docker images
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
 
-      - name: Deploy to Dev WAS Server
+      - name: Deploy to Main WAS Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.WAS_HOST }}
